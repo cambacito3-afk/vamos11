@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peru in a Backpack</title>
+  <style>
+    :root {
+      font-size: larger;
+      font-weight: bold;
+      line-height: 1.2;
+      --bg-1: #0f2027;
+      --bg-2: #203a43;
+      --bg-3: #2c5364;
+      --accent: #f0a500;
+      --soft: #f7efe5;
+      --text: #e9f2f5;
+      --muted: rgba(233, 242, 245, 0.7);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(15, 32, 39, 0.8);
+      border-bottom: 1px solid rgba(240, 165, 0, 0.2);
+      z-index: 1000;
+    }
+
+    nav {
+      max-width: 400px;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 50px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    nav .brand {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      letter-spacing: 0.5px;
+      font-size: 1.1rem;
+      color: var(--soft);
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--soft);
+      background: rgba(240, 165, 0, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 120px 20px 80px;
+      text-align: left;
+      display: grid;
+      gap: 20px;
+    }
+
+    .hero.mural {
+      width: 100%;
+      min-height: 120vh;
+      padding: 260px 24px 120px;
+      display: grid;
+      align-items: end;
+      color: var(--soft);
+      background:
+        linear-gradient(180deg, rgba(15, 32, 39, 0.78), rgba(15, 32, 39, 0.48)),
+        url('./machu-picchu-peru-inca-tourism-preview (1).jpg') center/cover no-repeat;
+
+
+
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      color: var(--soft);
+      line-height: 1.1;
+      text-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 0 0 18px;
+      font-size: 1.05rem;
+      color: var(--muted);
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(240, 165, 0, 0.45);
+      text-decoration: none;
+      color: var(--soft);
+      font-weight: 600;
+      background: linear-gradient(120deg, rgba(240, 165, 0, 0.25), rgba(240, 165, 0, 0.05));
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      border-color: rgba(240, 165, 0, 0.7);
+    }
+
+    main {
+      flex: 1;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px 20px;
+    }
+
+    section h2 {
+      margin: 0 0 12px;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      color: var(--soft);
+      letter-spacing: 0.4px;
+    }
+
+    section p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(233, 242, 245, 0.08);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(240, 165, 0, 0.4);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      color: var(--soft);
+    }
+
+    .card span {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: rgba(240, 165, 0, 0.15);
+      color: var(--soft);
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 26px 20px 40px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        justify-content: center;
+      }
+
+      .cta-row {
+        width: 100%;
+      }
+
+      .hero {
+        padding-top: 100px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="brand">Peru in a Backpack</div>
+      <div class="links">
+        <a href="#cusco-historic">Cusco Historic</a>
+        <a href="#transports">Transports</a>
+        <a href="#adventure">Adventure Activities</a>
+        <a href="#accommodation">Accommodation</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero mural">
+      <div>
+        <h1>Travelling near the sky</h1>
+        <p>Curated ideas for experiencing Peru with only a backpack. Walk through Inca stones at dawn, chase salt-lake
+          sunsets, and sleep under the brightest southern stars.</p>
+        <div class="cta-row">
+          <a class="btn" href="#cusco-historic">Start in Cusco</a>
+          <a class="btn" href="#adventure">Find an adventure</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="cusco-historic">
+      <h2>Cusco Historic</h2>
+      <p>Base yourself at altitude (3,399 m) to acclimatize and wander from colonial plazas to hidden courtyards.</p>
+      <div class="card-grid">
+        <article class="card">
+          <span>Must do</span>
+          <h3>Sunrise at Sacsayhuamán</h3>
+          <ul>
+            <li>Climb early to watch alpenglow on Andean peaks.</li>
+            <li>Pack coca tea; mornings are crisp even in dry season.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span>Half day</span>
+          <h3>San Blas craft walk</h3>
+          <ul>
+            <li>Stone streets, ateliers, and airy cafés for a slower pace.</li>
+            <li>Pick up handwoven textiles direct from artisans.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span>Evening</span>
+          <h3>Plaza de Armas after dusk</h3>
+          <ul>
+            <li>Catch folk music under colonnades with warm street light.</li>
+            <li>Try aji de gallina or rocoto relleno from tiny kitchens.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="transports">
+      <h2>Transports</h2>
+      <p>Move light: combine buses for budget legs and trains for scenic windows.</p>
+      <div class="card-grid">
+        <article class="card">
+          <span>Bus</span>
+          <h3>Cusco → Puno</h3>
+          <ul>
+            <li>Night bus with 160° seats; choose lower deck for smoother ride.</li>
+            <li>Arrive for floating islands on Lake Titicaca at dawn.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span>Train</span>
+          <h3>Ollantaytambo → Aguas Calientes</h3>
+          <ul>
+            <li>Vistadome cars give the best river-and-jungle frames.</li>
+            <li>Book the earliest slot to beat mid-morning crowds at Machu Picchu.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span>Shared taxis</span>
+          <h3>Valle Sagrado hops</h3>
+          <ul>
+            <li>Collectivos between Pisac, Urubamba, and Chinchero run all day.</li>
+            <li>Carry coins; fares are fastest with exact change.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="adventure">
+      <h2>Adventure Activities</h2>
+      <p>Choose altitude-friendly outings first, then push higher once your body agrees.</p>
+      <div class="card-grid">
+        <article class="card">
+          <span>Day trek</span>
+          <h3>Laguna Humantay</h3>
+          <ul>
+            <li>Emerald glacier lake at 4,200 m; start before 6:00 to avoid clouds.</li>
+            <li>Layers and rain shell essential — weather flips fast.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span>Multi‑day</span>
+          <h3>Salkantay trek</h3>
+          <ul>
+            <li>Less crowded approach to Machu Picchu with high passes and jungle finish.</li>
+            <li>Plan 4–5 days; book mules locally for lighter packs.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span>Adrenaline</span>
+          <h3>Colca Canyon</h3>
+          <ul>
+            <li>Descend twice the depth of the Grand Canyon; spot condors on thermals.</li>
+            <li>Hydrate — Arequipa heat sneaks up after chilly mornings.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="accommodation">
+      <h2>Accommodation</h2>
+      <p>Stay small-scale to meet other backpackers and locals.</p>
+      <div class="card-grid">
+        <article class="card">
+          <span>Cusco</span>
+          <h3>San Blas hostels</h3>
+          <ul>
+            <li>Terraced views over tiled roofs; short walk to Plaza.</li>
+            <li>Ask for rooms away from the street for quieter nights.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span>Andes</span>
+          <h3>Homestays</h3>
+          <ul>
+            <li>Lake Titicaca islands and Colca villages offer family stays.</li>
+            <li>Dinners are simple, hearty, and perfect after long hikes.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <span>Jungle</span>
+          <h3>Eco-lodges</h3>
+          <ul>
+            <li>Puerto Maldonado lodges bundle river transport and guided walks.</li>
+            <li>Pack biodegradable repellent; humidity is relentless.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Ready to go lighter? Save the map offline, carry layers, and keep sunrise slots for the magic hours.
+  </footer>
+</body>
+
+</html>
